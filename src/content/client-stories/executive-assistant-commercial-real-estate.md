@@ -2,7 +2,7 @@
 title: "A Commercial Real Estate Broker Stopped Losing Tenant Leads to Slow Follow-Up"
 description: "A commercial broker representing landlords and business tenants was losing warm leasing inquiries because he couldn't respond fast enough between site tours. A dedicated executive assistant now handles his calendar and first-touch follow-up."
 role: "Executive Assistant"
-image: "/images/puzzle-fit.jpg"
+image: "/images/real-estate-keys.jpg"
 challenge: "Between property tours, landlord calls, and lease negotiations, he often didn't see a new tenant inquiry until hours after it came in, by which point the prospective tenant's broker had already lined up a competing space to tour. His calendar was also double-booked more than once a month, since he was scheduling tours from his phone between meetings."
 solution: "His HestiaHire executive assistant now manages his calendar in full, sends a same-hour acknowledgment to every new tenant inquiry with available tour times, and preps a one-page brief before each tour with space specs, landlord terms, and prior conversation notes."
 resultMetric: "Lead response time dropped from an average of 4 hours to under 25 minutes, and tour-to-LOI conversion rose over two quarters"

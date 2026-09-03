@@ -2,7 +2,7 @@
 title: "A Solo B2B Consultant Reclaimed 12 Hours a Week Without Hiring In-House"
 description: "A one-person management consulting practice serving mid-market companies was spending nearly a third of the work week on scheduling and admin instead of client work. A dedicated executive assistant took it off her plate entirely."
 role: "Executive Assistant"
-image: "/images/focused-work.jpg"
+image: "/images/consultant-on-call.jpg"
 challenge: "She was running a growing management consulting practice solo, advising mid-market companies on operations: client work, proposals, scheduling, travel, and invoicing all fell on her. Calendar back-and-forth alone was eating hours each week, and she'd started turning down new client calls simply because she couldn't find time to book them."
 solution: "Her HestiaHire executive assistant now owns her calendar end to end, drafts and sends proposals from her templates, handles travel booking, and does a Friday inbox and invoicing pass. She only sees what actually needs her judgment."
 resultMetric: "Reclaimed roughly 12 hours a week, and took on 3 additional clients in the following quarter without extending her work hours"

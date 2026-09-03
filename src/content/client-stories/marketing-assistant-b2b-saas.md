@@ -2,7 +2,7 @@
 title: "A 4-Person B2B SaaS Startup Shipped Its First Real Content Engine"
 description: "A seed-stage SaaS team had never published consistent content because nobody on a four-person team had the bandwidth. A dedicated marketing assistant got a weekly cadence running in a month."
 role: "Marketing Assistant"
-image: "/images/presenter-conference.jpg"
+image: "/images/team-whiteboard-brainstorm.jpg"
 challenge: "The founding team knew content marketing mattered for a self-serve SaaS product, but with four people covering product, engineering, and sales, marketing content was the thing that never happened. The company blog had three posts in a year, all written in a rush before a launch."
 solution: "HestiaHire matched them with a marketing assistant experienced in B2B SaaS content, who now runs a weekly publishing cadence: drafts pulled from customer conversations and product updates, reviewed by the founder in a 30-minute weekly sync, then published, distributed, and repurposed into social posts and a newsletter."
 resultMetric: "Went from 3 blog posts a year to weekly publishing, with organic search traffic to the blog up 5x in the first two quarters"

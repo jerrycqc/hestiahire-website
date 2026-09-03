@@ -2,7 +2,7 @@
 title: "A Freight Brokerage Started Winning Shipper Accounts Its Sales Team Never Saw"
 description: "A regional freight brokerage relied entirely on outbound sales calls to win shipper accounts. A dedicated marketing assistant built the inbound content and outreach that neither owner had time for."
 role: "Marketing Assistant"
-image: "/images/creative-team-review.jpg"
+image: "/images/warehouse-tablet-check.jpg"
 challenge: "The two owners split their time between carrier relationships and chasing new shipper accounts by phone. Nobody had time to build a website worth visiting, publish anything about lane capacity or rate trends, or run the LinkedIn outreach that generates inbound interest from shipper procurement teams. Every new account came from a cold call."
 solution: "HestiaHire matched them with a marketing assistant experienced in B2B logistics content, who now runs LinkedIn outreach to shipper and procurement contacts, publishes a monthly capacity and rate update their sales team can forward to prospects, and rebuilt their service pages around the lanes and freight types they actually specialize in."
 resultMetric: "Inbound shipper inquiries went from roughly 1 a month to 9, and the sales team closed 4 new accounts sourced from marketing in the first quarter"

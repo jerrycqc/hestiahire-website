@@ -2,7 +2,7 @@
 title: "A B2B Wholesale Distributor Cut Business-Account Response Time From Two Days to Four Hours"
 description: "A wholesale distributor's business customers were waiting days for order-status and account questions. A dedicated support assistant brought response time down to hours, without adding headcount."
 role: "Customer Support Assistant"
-image: "/images/video-call-team.jpg"
+image: "/images/distributor-owner-warehouse.jpg"
 challenge: "As the distributor's account base grew, support requests from retail and business buyers, mostly order status, backorder timing, and account-level pricing questions, piled up in a shared inbox nobody owned full-time. The operations manager cleared it between other duties, and response times had crept out to nearly two days during busy weeks, which was starting to cost renewal conversations."
 solution: "A dedicated HestiaHire support assistant now owns the business-account inbox during business hours, working from a playbook built around the distributor's actual order and pricing systems, and escalates only genuine account-management issues (credit holds, custom pricing disputes) to the sales team directly."
 resultMetric: "Average first response time fell from 2 days to under 4 hours, and account renewal conversations improved noticeably once buyers stopped citing slow support as a reason to shop elsewhere"
