@@ -1,6 +1,13 @@
 ---
 import { services } from '../data/site';
 import PhotoPlaceholder from './PhotoPlaceholder.astro';
+
+const roleImages: Record<string, string> = {
+  'Marketing Assistant': '/images/creative-team-review.jpg',
+  'Executive Assistant': '/images/whiteboard-team.jpg',
+  'Operations & Admin Assistant': '/images/puzzle-fit.jpg',
+  'Customer Support Assistant': '/images/presenter-conference.jpg',
+};
 ---
 
 <section id="roles" class="roles">
@@ -12,7 +19,7 @@ import PhotoPlaceholder from './PhotoPlaceholder.astro';
   <div class="roles__grid">
     {services.map((svc) => (
       <div class="role-card">
-        <PhotoPlaceholder shape="square" label={`${svc.title} placeholder photo`} />
+        <PhotoPlaceholder shape="square" src={roleImages[svc.title]} label={`${svc.title} at work`} />
         <div class="role-card__body">
           <div class="role-card__number">{svc.number}</div>
           <div class="role-card__title">{svc.title}</div>

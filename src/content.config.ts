@@ -7,6 +7,7 @@ const clientStories = defineCollection({
     title: z.string(),
     description: z.string(),
     role: z.string(),
+    image: z.string().optional(),
     challenge: z.string(),
     solution: z.string(),
     resultMetric: z.string(),

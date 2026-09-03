@@ -6,6 +6,7 @@ interface Story {
   role: string;
   title: string;
   resultMetric: string;
+  image?: string;
 }
 
 interface Props {
@@ -25,7 +26,7 @@ const { stories } = Astro.props;
   </div>
   <div class="stories__grid">
     {stories.map((story) => (
-      <ClientStoryCard href={story.href} role={story.role} title={story.title} resultMetric={story.resultMetric} />
+      <ClientStoryCard href={story.href} role={story.role} title={story.title} resultMetric={story.resultMetric} image={story.image} />
     ))}
   </div>
 </section>

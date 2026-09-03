@@ -1,27 +1,37 @@
 ---
-// Placeholder for a human/Canva stock photo. Sized and shaped to drop a
-// real <img src="..."> in later without touching layout. `shape` picks the
-// crop: "portrait" (4:5, hero/about), "square" (1:1, avatar cards), or
-// "circle" (round avatar chip).
+// Renders a real photo when `src` is given (object-fit: cover inside the
+// same aspect-ratio box), or an abstract placeholder when it isn't, so new
+// content never renders blank while real photos are still being sourced.
+// `shape` picks the crop: "portrait" (4:5, hero/about), "square" (1:1,
+// avatar cards), or "circle" (round avatar chip). `focus` sets object-position
+// for a real photo, e.g. "center 20%" to favor faces near the top of a frame.
 interface Props {
   shape?: 'portrait' | 'square' | 'circle';
   label?: string;
+  src?: string;
+  focus?: string;
 }
 
-const { shape = 'portrait', label } = Astro.props;
+const { shape = 'portrait', label, src, focus = 'center' } = Astro.props;
 ---
 
-<div class:list={['photo', `photo--${shape}`]} role="img" aria-label={label ?? 'Photo placeholder'}>
-  <svg viewBox="0 0 24 24" class="photo__icon" fill="none">
-    <circle cx="12" cy="8.5" r="3.4" stroke="currentColor" stroke-width="1.6" />
-    <path
-      d="M4.8 19.2c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"
-      stroke="currentColor"
-      stroke-width="1.6"
-      stroke-linecap="round"
-    />
-  </svg>
-</div>
+{src ? (
+  <div class:list={['photo', `photo--${shape}`]}>
+    <img src={src} alt={label ?? ''} style={{ objectPosition: focus }} />
+  </div>
+) : (
+  <div class:list={['photo', `photo--${shape}`]} role="img" aria-label={label ?? 'Photo placeholder'}>
+    <svg viewBox="0 0 24 24" class="photo__icon" fill="none">
+      <circle cx="12" cy="8.5" r="3.4" stroke="currentColor" stroke-width="1.6" />
+      <path
+        d="M4.8 19.2c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+)}
 
 <style>
   .photo {
@@ -31,6 +41,12 @@ const { shape = 'portrait', label } = Astro.props;
     background: linear-gradient(155deg, var(--color-surface-warm), var(--color-accent-tint));
     color: var(--color-accent);
     overflow: hidden;
+  }
+
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .photo--portrait {

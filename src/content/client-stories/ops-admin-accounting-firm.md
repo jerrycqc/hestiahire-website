@@ -1,8 +1,9 @@
 ---
-title: "A Small Accounting Firm Cut Vendor Onboarding From Two Weeks to Three Days"
-description: "A 12-person accounting firm's operations admin was scattered across three partners' inboxes. A dedicated ops assistant centralized it and cut vendor and client onboarding time dramatically."
+title: "A Small B2B Accounting Firm Cut Client Onboarding From Two Weeks to Three Days"
+description: "A 12-person accounting firm serving business clients had its operations admin scattered across three partners' inboxes. A dedicated ops assistant centralized it and cut business-client onboarding time dramatically."
 role: "Operations & Admin Assistant"
-challenge: "New client and vendor onboarding involved paperwork spread across three partners, each handling their own intake differently. Nobody owned the process end to end, so files went missing, follow-ups got dropped, and onboarding routinely dragged out two weeks or more."
+image: "/images/whiteboard-team.jpg"
+challenge: "New business-client and vendor onboarding involved paperwork spread across three partners, each handling their own intake differently. Nobody owned the process end to end, so files went missing, follow-ups got dropped, and onboarding routinely dragged out two weeks or more."
 solution: "HestiaHire placed a dedicated operations assistant who now owns intake for the whole firm: a single checklist-driven process, one point of contact for new clients and vendors, and weekly status reporting to the partners so nothing sits untouched."
 resultMetric: "Average onboarding time dropped from 14 days to 3, and partner time spent on admin fell by roughly 6 hours a week combined"
 pubDate: 2026-05-20
