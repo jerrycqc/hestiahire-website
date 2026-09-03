@@ -3,79 +3,92 @@ import { fitCriteria } from '../data/site';
 ---
 
 <section class="fit">
-  <div class="fit__col fit__col--good">
-    <div class="fit__label">
-      <span class="fit__badge fit__badge--good">Good fit</span>
+  <div class="fit__row">
+    <div class="fit__row-label">
+      <span class="fit__check fit__check--good" aria-hidden="true">✓</span>
+      This is a fit if
     </div>
-    <div class="fit__list">
-      {fitCriteria.good.map((item) => <div>{item}</div>)}
+    <div class="fit__chips">
+      {fitCriteria.good.map((item) => <span class="fit__chip fit__chip--good">{item}</span>)}
     </div>
   </div>
-  <div class="fit__col">
-    <div class="fit__label">
-      <span class="fit__badge">Not a fit</span>
+  <div class="fit__row">
+    <div class="fit__row-label fit__row-label--muted">
+      <span class="fit__check fit__check--bad" aria-hidden="true">✕</span>
+      Not the right fit if
     </div>
-    <div class="fit__list fit__list--muted">
-      {fitCriteria.bad.map((item) => <div>{item}</div>)}
+    <div class="fit__chips">
+      {fitCriteria.bad.map((item) => <span class="fit__chip fit__chip--bad">{item}</span>)}
     </div>
   </div>
 </section>
 
 <style>
   .fit {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
 
-  .fit__col {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 40px;
+  .fit__row-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
   }
 
-  .fit__col--good {
-    background: var(--color-accent-tint);
-    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  .fit__row-label--muted {
+    color: var(--color-ink-faint);
   }
 
-  .fit__label {
-    margin-bottom: 22px;
-  }
-
-  .fit__badge {
+  .fit__check {
     display: inline-flex;
     align-items: center;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 7px 16px;
-    border-radius: var(--radius-pill);
-    background: var(--color-surface-warm);
-    color: var(--color-ink-soft);
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 12px;
+    flex-shrink: 0;
   }
 
-  .fit__badge--good {
+  .fit__check--good {
     background: var(--color-accent);
     color: var(--color-white);
   }
 
-  .fit__list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--color-ink-soft);
-  }
-
-  .fit__list--muted {
+  .fit__check--bad {
+    background: var(--color-surface-warm);
     color: var(--color-ink-faint);
   }
 
-  @media (max-width: 720px) {
-    .fit {
-      grid-template-columns: 1fr;
-    }
+  .fit__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .fit__chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .fit__chip--good {
+    background: var(--color-accent-tint);
+    border: 1.5px solid color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+    color: var(--color-ink);
+  }
+
+  .fit__chip--bad {
+    background: transparent;
+    border: 1.5px dashed var(--color-border-strong);
+    color: var(--color-ink-faint);
   }
 </style>
