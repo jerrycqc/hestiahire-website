@@ -1,0 +1,53 @@
+---
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+
+interface Props {
+  href: string;
+  role: string;
+  title: string;
+  resultMetric: string;
+}
+
+const { href, role, title, resultMetric } = Astro.props;
+---
+
+<a href={href} class="story-card">
+  <PhotoPlaceholder shape="square" label={`${role} client story photo`} />
+  <div class="story-card__body">
+    <div class="story-card__role">{role}</div>
+    <div class="story-card__title">{title}</div>
+    <div class="story-card__metric">{resultMetric}</div>
+  </div>
+</a>
+
+<style>
+  .story-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .story-card__body {
+    padding-top: 18px;
+  }
+
+  .story-card__role {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+
+  .story-card__title {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 10px;
+  }
+
+  .story-card__metric {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+</style>

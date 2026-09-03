@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title={`Privacy Policy · ${site.name}`} description={`How ${site.name} handles data submitted on this website.`} path="/privacy/">
+  <Header />
+  <main>
+    <article class="legal">
+      <a href="/" class="legal__back">← Back home</a>
+      <div class="legal__head">
+        <h1>Privacy Policy</h1>
+        <p class="legal__updated">Last updated: September 3, 2026</p>
+      </div>
+
+      <div class="prose">
+        <h2>1. What this covers</h2>
+        <p>
+          This policy explains how {site.name} handles information submitted through this website. It doesn't
+          cover information exchanged during an actual client engagement, which is handled separately.
+        </p>
+
+        <h2>2. What we collect</h2>
+        <p>
+          The only data this Site collects is what you choose to submit through the inquiry form: name, work
+          email, company, project type, and your message. This Site does not currently use cookies, analytics, or
+          any other automatic tracking.
+        </p>
+
+        <h2>3. How we use it</h2>
+        <p>
+          Submitted information is used only to respond to your inquiry, evaluate whether it's a good fit, and
+          follow up. We don't sell it, and we don't share it with third parties except the service provider
+          needed to operate the form itself (see below).
+        </p>
+
+        <h2>4. Data retention</h2>
+        <p>
+          We keep inquiry submissions as long as reasonably needed to respond and maintain business records. You
+          can request deletion at any time. See Contact below.
+        </p>
+
+        <h2>5. Third-party services</h2>
+        <p>
+          The inquiry form is processed and stored by Netlify (our hosting provider) using their Forms product.
+          See <a href="https://www.netlify.com/privacy/">Netlify's privacy policy</a> for how they handle that data.
+        </p>
+
+        <h2>6. Your rights</h2>
+        <p>
+          You can ask what data we hold about you, or ask us to correct or delete it, by emailing us. See Contact
+          below.
+        </p>
+
+        <h2>7. Children's privacy</h2>
+        <p>This Site is intended for business use and is not directed at children.</p>
+
+        <h2>8. Changes to this policy</h2>
+        <p>We may update this policy from time to time; the "Last updated" date above will reflect that.</p>
+
+        <h2>9. Contact</h2>
+        <p>
+          Questions about this policy, or a data request? Email{' '}
+          <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
+        </p>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: 72px 48px 100px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .legal__back {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .legal__head {
+    margin: 28px 0 40px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+  }
+
+  .legal__updated {
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    margin: 0;
+  }
+
+  .prose {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-ink);
+  }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    margin: 32px 0 10px;
+  }
+
+  .prose h2:first-child {
+    margin-top: 0;
+  }
+
+  .prose p {
+    margin: 0 0 16px;
+    color: var(--color-ink-soft);
+  }
+
+  .prose a {
+    color: var(--color-accent);
+  }
+</style>

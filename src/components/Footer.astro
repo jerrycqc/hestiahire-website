@@ -1,0 +1,77 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+const isHome = Astro.url.pathname === '/';
+---
+
+<footer class="footer">
+  <div class="footer__brand">{site.name}</div>
+  <div class="footer__center">
+    <div class="footer__copy">© {year} {site.name}. Dedicated remote assistants for growing teams.</div>
+    <nav class="footer__legal">
+      <a href="/privacy">Privacy</a>
+    </nav>
+  </div>
+  {isHome ? (
+    <a href="#top" class="footer__link">Back to top ↑</a>
+  ) : (
+    <a href="/" class="footer__link">← Back home</a>
+  )}
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .footer__brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .footer__center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer__copy {
+    font-size: 14px;
+    color: var(--color-ink-faint);
+  }
+
+  .footer__legal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .footer__legal a {
+    color: var(--color-ink-faint);
+    text-decoration: none;
+  }
+
+  .footer__legal a:hover {
+    color: var(--color-ink);
+  }
+
+  .footer__link {
+    font-size: 14px;
+    color: var(--color-ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+</style>

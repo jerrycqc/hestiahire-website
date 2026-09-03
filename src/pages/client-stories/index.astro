@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ClientStoryCard from '../../components/ClientStoryCard.astro';
+import { site } from '../../data/site';
+
+const allStories = (await getCollection('clientStories')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const description =
+  'Real HestiaHire placements across marketing, executive support, operations, and customer support, with the time and outcomes clients got back.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${site.name} · Client Stories`,
+  url: `${site.url}/client-stories/`,
+  hasPart: allStories.map((story) => ({
+    '@type': 'Article',
+    headline: story.data.title,
+    url: `${site.url}/client-stories/${story.id}/`,
+    datePublished: story.data.pubDate.toISOString(),
+  })),
+};
+---
+
+<BaseLayout title={`Client Stories · ${site.name}`} description={description} path="/client-stories/" jsonLd={jsonLd}>
+  <Header />
+  <main class="page">
+    <div class="stories-head">
+      <div class="eyebrow">Client stories</div>
+      <h1>Real teams, real hires, real time back.</h1>
+      <p>{description}</p>
+    </div>
+
+    <div class="stories-grid">
+      {allStories.map((story) => (
+        <ClientStoryCard
+          href={`/client-stories/${story.id}/`}
+          role={story.data.role}
+          title={story.data.title}
+          resultMetric={story.data.resultMetric}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 64px 48px 120px;
+  }
+
+  .stories-head {
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+
+  .eyebrow {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+
+  .stories-head p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  @media (max-width: 860px) {
+    .stories-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import { fitCriteria } from '../data/site';
+---
+
+<section class="fit">
+  <div class="fit__col fit__col--good">
+    <div class="fit__label">
+      <span class="fit__badge fit__badge--good">Good fit</span>
+    </div>
+    <div class="fit__list">
+      {fitCriteria.good.map((item) => <div>{item}</div>)}
+    </div>
+  </div>
+  <div class="fit__col">
+    <div class="fit__label">
+      <span class="fit__badge">Not a fit</span>
+    </div>
+    <div class="fit__list fit__list--muted">
+      {fitCriteria.bad.map((item) => <div>{item}</div>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .fit__col {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 40px;
+  }
+
+  .fit__col--good {
+    background: var(--color-accent-tint);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  }
+
+  .fit__label {
+    margin-bottom: 22px;
+  }
+
+  .fit__badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-warm);
+    color: var(--color-ink-soft);
+  }
+
+  .fit__badge--good {
+    background: var(--color-accent);
+    color: var(--color-white);
+  }
+
+  .fit__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+
+  .fit__list--muted {
+    color: var(--color-ink-faint);
+  }
+
+  @media (max-width: 720px) {
+    .fit {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

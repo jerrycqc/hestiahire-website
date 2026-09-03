@@ -1,0 +1,78 @@
+---
+import ClientStoryCard from './ClientStoryCard.astro';
+
+interface Story {
+  href: string;
+  role: string;
+  title: string;
+  resultMetric: string;
+}
+
+interface Props {
+  stories: Story[];
+}
+
+const { stories } = Astro.props;
+---
+
+<section id="stories" class="stories">
+  <div class="stories__head">
+    <div>
+      <div class="eyebrow">Client stories</div>
+      <h2>Real teams, real hires, real time back.</h2>
+    </div>
+    <a href="/client-stories" class="stories__all">Read all stories →</a>
+  </div>
+  <div class="stories__grid">
+    {stories.map((story) => (
+      <ClientStoryCard href={story.href} role={story.role} title={story.title} resultMetric={story.resultMetric} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .stories__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 36px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .stories__all {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .stories__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 860px) {
+    .stories__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

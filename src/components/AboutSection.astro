@@ -1,0 +1,90 @@
+---
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+---
+
+<section id="guarantee" class="about">
+  <div class="about__media">
+    <PhotoPlaceholder shape="portrait" label="A HestiaHire success manager on a call with a client" />
+  </div>
+  <div class="about__text">
+    <div class="eyebrow">Why teams stay</div>
+    <p class="about__quote">"We don't hand you a resume and disappear. We stay on as the people who keep it working."</p>
+    <p class="about__body">
+      Every HestiaHire placement comes with a dedicated success manager, monthly check-ins, and a straightforward
+      guarantee: if your hire isn't the right fit in the first 90 days, we replace them at no extra cost. No fine
+      print, no long re-vetting process.
+    </p>
+    <div class="about__guarantee">
+      <div class="about__guarantee-title">90-day replacement guarantee</div>
+      <div class="about__guarantee-body">Not a fit? We re-match you at no charge, as many times as it takes.</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 18px;
+  }
+
+  .about__quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.4;
+    margin: 0 0 22px;
+    color: var(--color-ink);
+  }
+
+  .about__body {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    margin: 0 0 28px;
+  }
+
+  .about__guarantee {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 20px;
+  }
+
+  .about__guarantee-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .about__guarantee-body {
+    font-size: 14.5px;
+    color: var(--color-ink-faint);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .about__media {
+      max-width: 340px;
+    }
+
+    .about__quote {
+      font-size: 23px;
+    }
+  }
+</style>

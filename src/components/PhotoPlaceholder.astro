@@ -1,0 +1,59 @@
+---
+// Placeholder for a human/Canva stock photo. Sized and shaped to drop a
+// real <img src="..."> in later without touching layout. `shape` picks the
+// crop: "portrait" (4:5, hero/about), "square" (1:1, avatar cards), or
+// "circle" (round avatar chip).
+interface Props {
+  shape?: 'portrait' | 'square' | 'circle';
+  label?: string;
+}
+
+const { shape = 'portrait', label } = Astro.props;
+---
+
+<div class:list={['photo', `photo--${shape}`]} role="img" aria-label={label ?? 'Photo placeholder'}>
+  <svg viewBox="0 0 24 24" class="photo__icon" fill="none">
+    <circle cx="12" cy="8.5" r="3.4" stroke="currentColor" stroke-width="1.6" />
+    <path
+      d="M4.8 19.2c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+    />
+  </svg>
+</div>
+
+<style>
+  .photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(155deg, var(--color-surface-warm), var(--color-accent-tint));
+    color: var(--color-accent);
+    overflow: hidden;
+  }
+
+  .photo--portrait {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-md);
+    width: 100%;
+  }
+
+  .photo--square {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    width: 100%;
+  }
+
+  .photo--circle {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    width: 100%;
+  }
+
+  .photo__icon {
+    width: 34%;
+    height: 34%;
+    opacity: 0.55;
+  }
+</style>

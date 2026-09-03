@@ -1,0 +1,185 @@
+---
+import { site, heroStats } from '../data/site';
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+---
+
+<section id="top" class="hero">
+  <div class="hero__text">
+    <div class="eyebrow">{site.eyebrow}</div>
+    <h1>{site.tagline}</h1>
+    <p class="lede">
+      We match SMBs and small agencies with dedicated, full-time remote assistants across marketing, executive
+      support, operations, and customer support, matched in about a week and backed by a real person on our side.
+    </p>
+    <div class="hero__actions">
+      <a href="#contact" class="btn btn--primary">Start hiring</a>
+      <a href="/pricing" class="btn btn--outline">See pricing</a>
+    </div>
+    <div class="stats">
+      {heroStats.map((stat) => (
+        <div class="stat">
+          <div class="stat__value">{stat.value}</div>
+          <div class="stat__label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="hero__media">
+    <PhotoPlaceholder shape="portrait" label="A HestiaHire remote assistant at work" />
+    <div class="hero__card">
+      <PhotoPlaceholder shape="circle" label="Portrait of Maritess, Marketing Assistant" />
+      <div>
+        <div class="hero__card-name">Maritess</div>
+        <div class="hero__card-role">Marketing Assistant · 3 yrs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 54px;
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    max-width: 14ch;
+  }
+
+  .lede {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    max-width: 480px;
+    margin: 0 0 32px;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 26px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    font-size: 15.5px;
+    font-weight: 700;
+  }
+
+  .btn--primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+  }
+
+  .btn--primary:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .btn--outline {
+    border: 1.5px solid var(--color-border-strong);
+    color: var(--color-ink);
+  }
+
+  .btn--outline:hover {
+    background: var(--color-surface-warm);
+  }
+
+  .stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .stat__value {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 4px;
+  }
+
+  .stat__label {
+    font-size: 13.5px;
+    color: var(--color-ink-faint);
+    max-width: 16ch;
+    line-height: 1.4;
+  }
+
+  .hero__media {
+    position: relative;
+  }
+
+  .hero__card {
+    position: absolute;
+    left: -32px;
+    bottom: -28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 14px 20px 14px 14px;
+    box-shadow: 0 16px 32px -12px color-mix(in srgb, var(--color-ink) 18%, transparent);
+    max-width: 220px;
+  }
+
+  .hero__card :global(.photo--circle) {
+    width: 46px;
+    flex-shrink: 0;
+  }
+
+  .hero__card-name {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 600;
+  }
+
+  .hero__card-role {
+    font-size: 12.5px;
+    color: var(--color-ink-faint);
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    h1 {
+      font-size: 40px;
+      max-width: none;
+    }
+
+    .hero__media {
+      order: -1;
+      max-width: 380px;
+      margin: 0 auto 24px;
+    }
+  }
+</style>

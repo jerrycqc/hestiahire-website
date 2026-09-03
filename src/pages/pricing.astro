@@ -1,0 +1,357 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+const tiers = [
+  {
+    name: 'Part-Time',
+    price: '$1,800',
+    unit: '/mo · 20 hrs/wk',
+    desc: 'A dedicated assistant for the recurring work that only needs half your week covered.',
+    features: [
+      'One dedicated assistant, 20 hrs/week',
+      'Any single role: marketing, EA, ops, or support',
+      'Success manager check-ins',
+      '90-day replacement guarantee',
+    ],
+    featured: false,
+  },
+  {
+    name: 'Full-Time',
+    price: '$3,000',
+    unit: '/mo · 40 hrs/wk',
+    desc: 'The most common plan: a full-time teammate who works only for you, for less than comparable agencies charge.',
+    features: [
+      'One dedicated assistant, 40 hrs/week',
+      'Any single role, or a blended role across two',
+      'Monthly success manager review call',
+      '90-day replacement guarantee',
+    ],
+    featured: true,
+  },
+  {
+    name: 'Senior & Specialized',
+    price: 'From $4,200',
+    unit: '/mo · custom scoped',
+    desc: 'Senior-level or niche-skilled assistants for more complex, higher-stakes work.',
+    features: [
+      '5+ years relevant experience',
+      'Scoped to your exact tool stack and workflows',
+      'Priority matching, usually within a week',
+      '90-day replacement guarantee',
+    ],
+    featured: false,
+  },
+] as const;
+
+const faqs = [
+  {
+    question: 'What happens if the hire isn’t working out?',
+    answer:
+      "Every plan includes a 90-day replacement guarantee. If it's not a fit, tell your success manager and we re-match you at no extra cost, as many times as it takes.",
+  },
+  {
+    question: 'Is this a contractor or an employee?',
+    answer:
+      'Your assistant works exclusively for you, full-time or part-time, under HestiaHire’s employment. You get one dedicated person; we handle payroll, benefits, and compliance on our end.',
+  },
+  {
+    question: 'How fast can we actually get someone hired?',
+    answer:
+      'Most clients see 2–3 matched candidates within 5–7 days of the intro call. From there, it’s your interview and onboarding pace.',
+  },
+  {
+    question: 'Can we change hours or roles later?',
+    answer:
+      'Yes. Plans adjust month to month as your needs change, and your success manager handles the transition either way.',
+  },
+] as const;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: `${site.name} · Pricing`,
+  url: `${site.url}/pricing/`,
+  itemListElement: tiers.map((tier) => ({
+    '@type': 'Offer',
+    name: `${tier.name} (${tier.unit})`,
+    description: tier.desc,
+  })),
+};
+---
+
+<BaseLayout
+  title={`Pricing · ${site.name}`}
+  description="Monthly subscription plans for a dedicated remote assistant, part-time to full-time to senior specialist. Every plan includes a success manager and a 90-day replacement guarantee."
+  path="/pricing/"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="page">
+    <div class="pricing-head">
+      <div class="eyebrow">Pricing</div>
+      <h1>One monthly plan. One dedicated hire.</h1>
+      <p>
+        No per-task billing and no bidding war. You pay a flat monthly rate, typically 20–25% below comparable
+        dedicated-hire agencies, for an assistant backed by a success manager and a 90-day replacement guarantee
+        on every plan.
+      </p>
+    </div>
+
+    <div class="tier-grid">
+      {tiers.map((tier) => (
+        <div class:list={['tier-card', { 'tier-card--featured': tier.featured }]}>
+          {tier.featured && <div class="tier-card__badge">Most common</div>}
+          <div class="tier-card__name">{tier.name}</div>
+          <div class="tier-card__price">
+            {tier.price}
+            <span class="tier-card__unit">{tier.unit}</span>
+          </div>
+          <p class="tier-card__desc">{tier.desc}</p>
+          <ul class="tier-card__features">
+            {tier.features.map((f) => <li>{f}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="faq-section">
+      <div class="eyebrow">Questions</div>
+      <h2>Pricing FAQ</h2>
+      <div class="faqs">
+        {faqs.map((faq) => (
+          <details class="faq">
+            <summary>{faq.question}</summary>
+            <p>{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="cta-panel">
+      <div>
+        <div class="cta-panel__title">Not sure which plan fits?</div>
+        <div class="cta-panel__body">Tell us the role and we'll recommend hours and a fair rate.</div>
+      </div>
+      <a href="/#contact" class="cta-panel__link">Start hiring</a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 64px 48px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .eyebrow {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+
+  .pricing-head {
+    max-width: 640px;
+  }
+
+  .pricing-head h1 {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+
+  .pricing-head p {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .tier-card {
+    position: relative;
+    padding: 32px 28px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tier-card--featured {
+    background: var(--color-accent-tint);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  }
+
+  .tier-card__badge {
+    position: absolute;
+    top: -13px;
+    left: 28px;
+    background: var(--color-accent);
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .tier-card__name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .tier-card__price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  .tier-card__unit {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-ink-faint);
+    margin-left: 6px;
+  }
+
+  .tier-card__desc {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    margin: 14px 0 24px;
+  }
+
+  .tier-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tier-card__features li {
+    font-size: 14px;
+    line-height: 1.5;
+    padding-left: 22px;
+    position: relative;
+  }
+
+  .tier-card__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .faq-section {
+    max-width: 720px;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+  }
+
+  .faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    background: var(--color-surface);
+  }
+
+  .faq summary {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .faq p {
+    margin: 14px 0 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  .cta-panel {
+    padding: 40px;
+    border-radius: var(--radius-md);
+    background: var(--color-accent-tint);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .cta-panel__title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .cta-panel__body {
+    font-size: 15px;
+    color: var(--color-ink-soft);
+  }
+
+  .cta-panel__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 28px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .cta-panel__link:hover {
+    background: var(--color-accent-hover);
+  }
+
+  @media (max-width: 860px) {
+    .tier-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

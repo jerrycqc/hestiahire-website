@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title={`Thanks · ${site.name}`} description="Your inquiry has been received." path="/thank-you/" noindex>
+  <Header />
+  <main>
+    <section class="thanks">
+      <div class="thanks__card">
+        <div class="thanks__title">Got it, thanks.</div>
+        <div class="thanks__body">We'll reach out within one business day with next steps.</div>
+        <a href="/" class="thanks__link">← Back home</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .thanks {
+    padding: 96px 48px 140px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .thanks__card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 48px;
+    text-align: center;
+    background: var(--color-surface);
+  }
+
+  .thanks__title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .thanks__body {
+    font-size: 15.5px;
+    color: var(--color-ink-soft);
+    margin-bottom: 24px;
+  }
+
+  .thanks__link {
+    font-size: 14px;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

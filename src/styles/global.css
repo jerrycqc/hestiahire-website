@@ -1,0 +1,73 @@
+/* HestiaHire design tokens: warm editorial theme */
+:root {
+  /* Warm ivory neutrals, lighter and cleaner than a deep "cream", avoiding the cliché cream+terracotta pairing */
+  --color-bg: oklch(98% 0.01 70);
+  --color-surface: oklch(100% 0.006 70);
+  --color-surface-warm: oklch(95% 0.02 60);
+  --color-border: oklch(89% 0.014 60);
+  --color-border-strong: oklch(78% 0.02 55);
+
+  /* Warm near-black ink, not pure black */
+  --color-ink: oklch(22% 0.02 40);
+  --color-ink-soft: oklch(42% 0.02 40);
+  --color-ink-faint: oklch(58% 0.018 45);
+
+  --color-white: oklch(99% 0 0);
+
+  /* Brand accent: hearth-glow amber, not terracotta. Swap this to re-theme. */
+  --color-accent: #C7791F;
+  --color-accent-hover: color-mix(in srgb, var(--color-accent) 84%, black);
+  --color-accent-light: color-mix(in srgb, var(--color-accent) 55%, white);
+  --color-accent-tint: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+  --color-accent-selection: color-mix(in srgb, var(--color-accent) 30%, white);
+
+  /* Secondary warm accent for contrast moments (guarantee badges, quote marks) */
+  --color-berry: #B94A5E;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Karla', sans-serif;
+
+  --max-width: 1160px;
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent-selection);
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-body);
+}

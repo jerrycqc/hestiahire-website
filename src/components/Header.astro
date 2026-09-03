@@ -1,0 +1,92 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+
+const currentPath = Astro.url.pathname;
+const isStoriesActive = currentPath.startsWith('/client-stories');
+const isPricingActive = currentPath.startsWith('/pricing');
+---
+
+<header class="header">
+  <a href="/" class="brand">
+    <Logo />
+    <span class="brand__name">{site.name}</span>
+  </a>
+  <nav class="nav">
+    <a href="/#roles">Roles We Place</a>
+    <a href="/#how-it-works">How It Works</a>
+    <a href="/client-stories" class:list={{ active: isStoriesActive }}>Client Stories</a>
+    <a href="/pricing" class:list={{ active: isPricingActive }}>Pricing</a>
+    <a href="/#contact" class="cta">Start hiring</a>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px 48px;
+    background: color-mix(in oklch, var(--color-bg) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+  }
+
+  .nav a:hover {
+    background: var(--color-surface-warm);
+    color: var(--color-ink);
+  }
+
+  .nav a.active {
+    background: var(--color-surface-warm);
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .nav a.cta {
+    margin-left: 8px;
+    background: var(--color-accent);
+    color: var(--color-white);
+    font-weight: 700;
+  }
+
+  .nav a.cta:hover {
+    background: var(--color-accent-hover);
+  }
+</style>

@@ -1,0 +1,322 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
+import { site } from '../../data/site';
+import { formatPostDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const stories = await getCollection('clientStories');
+  return stories.map((story) => ({
+    params: { slug: story.id },
+    props: { story },
+  }));
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+
+const url = `/client-stories/${story.id}/`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: story.data.title,
+    description: story.data.description,
+    datePublished: story.data.pubDate.toISOString(),
+    about: story.data.role,
+    author: { '@type': 'Organization', name: site.name },
+    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+    mainEntityOfPage: `${site.url}${url}`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: story.data.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={`${story.data.title} · ${site.name}`}
+  description={story.data.description}
+  path={url}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="page">
+    <article class="post">
+      <a href="/client-stories" class="post__back">← All client stories</a>
+
+      <div class="post__cover">
+        <PhotoPlaceholder shape="portrait" label={`${story.data.role} client story photo`} />
+      </div>
+
+      <div class="post__head">
+        <div class="post__meta">{story.data.role} · {formatPostDate(story.data.pubDate)}</div>
+        <h1>{story.data.title}</h1>
+        <p class="post__dek">{story.data.description}</p>
+      </div>
+
+      <div class="post__stats">
+        <div class="post__stat">
+          <div class="post__stat-label">Challenge</div>
+          <div class="post__stat-body">{story.data.challenge}</div>
+        </div>
+        <div class="post__stat">
+          <div class="post__stat-label">Solution</div>
+          <div class="post__stat-body">{story.data.solution}</div>
+        </div>
+        <div class="post__stat post__stat--result">
+          <div class="post__stat-label">Result</div>
+          <div class="post__stat-body">{story.data.resultMetric}</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <div class="faqs">
+        <div class="faqs__label">FAQ</div>
+        {story.data.faqs.map((faq) => (
+          <details class="faq">
+            <summary>{faq.question}</summary>
+            <p>{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="post__cta">
+        <div>
+          <div class="post__cta-title">Want a hire like this one?</div>
+          <div class="post__cta-body">Tell us the role, and we'll send matches within about a week.</div>
+        </div>
+        <a href="/#contact" class="post__cta-link">Start hiring</a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .post {
+    padding: 64px 0 120px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .post__back {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .post__cover {
+    margin-top: 28px;
+    max-width: 320px;
+  }
+
+  .post__head {
+    margin: 32px 0 40px;
+  }
+
+  .post__meta {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.18;
+    margin: 0 0 16px;
+  }
+
+  .post__dek {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .post__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .post__stat {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+  }
+
+  .post__stat--result {
+    background: var(--color-accent-tint);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  }
+
+  .post__stat-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+
+  .post__stat-body {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+
+  .prose {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-ink);
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 22px;
+  }
+
+  .prose :global(li) {
+    margin: 0 0 10px;
+  }
+
+  .prose :global(li:last-child) {
+    margin-bottom: 0;
+  }
+
+  .prose :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 22px;
+  }
+
+  .prose :global(p:has(> strong:only-child)) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--color-ink);
+  }
+
+  .prose :global(p:has(> strong:only-child) strong) {
+    font-weight: inherit;
+  }
+
+  .faqs {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faqs__label {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+
+  .faq {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    background: var(--color-surface);
+  }
+
+  .faq + .faq {
+    margin-top: 12px;
+  }
+
+  .faq summary {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .faq p {
+    margin: 14px 0 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  .post__cta {
+    margin-top: 56px;
+    padding: 36px;
+    border-radius: var(--radius-md);
+    background: var(--color-accent-tint);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .post__cta-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .post__cta-body {
+    font-size: 15px;
+    color: var(--color-ink-soft);
+  }
+
+  .post__cta-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 26px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .post__cta-link:hover {
+    background: var(--color-accent-hover);
+  }
+
+  @media (max-width: 640px) {
+    .post__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import FitSection from '../components/FitSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ClientStoriesPreview from '../components/ClientStoriesPreview.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site, services } from '../data/site';
+
+const allStories = await getCollection('clientStories');
+const latestStories = allStories
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3)
+  .map((story) => ({
+    href: `/client-stories/${story.id}/`,
+    role: story.data.role,
+    title: story.data.title,
+    resultMetric: story.data.resultMetric,
+  }));
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EmploymentAgency',
+    name: site.name,
+    url: site.url,
+    description: site.description,
+    areaServed: 'Worldwide',
+    makesOffer: services.map((svc) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: svc.title,
+        description: svc.desc,
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.url,
+  },
+];
+---
+
+<BaseLayout
+  title={`${site.name} · Remote Staffing for Growing Teams`}
+  description={site.description}
+  path="/"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="page">
+    <Hero />
+    <FitSection />
+    <ServicesSection />
+    <ProcessSection />
+    <AboutSection />
+    <ClientStoriesPreview stories={latestStories} />
+    <ContactForm />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 108px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 48px 120px;
+  }
+</style>
